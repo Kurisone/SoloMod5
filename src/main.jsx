@@ -31,3 +31,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
 }
+
