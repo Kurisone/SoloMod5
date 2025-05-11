@@ -1,6 +1,6 @@
-/* frontend/src/components/LoginFormPage/LoginForm.css */
+/* frontend/src/components/SignupFormPage/SignupForm.css */
 
-.login-form-container {
+.signup-form-container {
     max-width: 500px;
     margin: 2rem auto;
     padding: 2rem;
@@ -10,17 +10,17 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .login-form-container h1 {
+  .signup-form-container h1 {
     text-align: center;
     color: #2c3e50;
     margin-bottom: 1.5rem;
     font-weight: 600;
   }
   
-  .login-form {
+  .signup-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
   
   .form-group {
@@ -73,28 +73,22 @@
     background-color: #2980b9;
   }
   
-  .demo-user-button {
-    background-color: #2ecc71;
-    margin-top: 1rem;
-  }
-  
-  .demo-user-button:hover {
-    background-color: #27ae60;
+  .password-match-error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1rem;
   }
   
   /* Responsive adjustments */
   @media (max-width: 600px) {
-    .login-form-container {
+    .signup-form-container {
       margin: 1rem;
       padding: 1.5rem;
     }
   }
   
   /* Animation for form appearance */
-  .login-form-container {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-  
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -106,6 +100,10 @@
     }
   }
   
+  .signup-form-container {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
   /* Input error state */
   .form-group input.error {
     border-color: #e74c3c;
@@ -113,28 +111,4 @@
   
   .form-group input.error:focus {
     box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
-  }
-  
-  /* Additional login specific styles */
-  .login-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-  
-  .login-divider {
-    display: flex;
-    align-items: center;
-    margin: 1rem 0;
-    color: #95a5a6;
-    font-size: 0.8rem;
-  }
-  
-  .login-divider::before,
-  .login-divider::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid #ecf0f1;
-    margin: 0 0.5rem;
   }
