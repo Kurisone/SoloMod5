@@ -1,13 +1,11 @@
-// frontend/src/components/SignupFormPage/SignupFormPage.jsx
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useModal } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
 
-function SignupFormPage() {
+function SignupFormModal() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -15,8 +13,7 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-
-  if (sessionUser) return <Navigate to="/" replace={true} />;
+  const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,12 +27,14 @@ function SignupFormPage() {
           lastName,
           password
         })
-      ).catch(async (res) => {
-        const data = await res.json();
-        if (data?.errors) {
-          setErrors(data.errors);
-        }
-      });
+      )
+        .then(closeModal)
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data?.errors) {
+            setErrors(data.errors);
+          }
+        });
     }
     return setErrors({
       confirmPassword: "Confirm Password field must be the same as the Password field"
@@ -43,8 +42,8 @@ function SignupFormPage() {
   };
 
   return (
-    <div className="signup-form-container">
-      <h1>Sign Up</h1>
+    <div className="signup-modal-container">
+      <h1 className="signup-modal-title">Sign Up</h1>
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>
@@ -54,10 +53,10 @@ function SignupFormPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className={errors.email ? 'error' : ''}
+              className={errors.email ? 'input-error' : ''}
             />
           </label>
-          {errors.email && <div className="error-message">{errors.email}</div>}
+          {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
 
         <div className="form-group">
@@ -68,10 +67,10 @@ function SignupFormPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className={errors.username ? 'error' : ''}
+              className={errors.username ? 'input-error' : ''}
             />
           </label>
-          {errors.username && <div className="error-message">{errors.username}</div>}
+          {errors.username && <p className="error-message">{errors.username}</p>}
         </div>
 
         <div className="form-group">
@@ -82,10 +81,10 @@ function SignupFormPage() {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
-              className={errors.firstName ? 'error' : ''}
+              className={errors.firstName ? 'input-error' : ''}
             />
           </label>
-          {errors.firstName && <div className="error-message">{errors.firstName}</div>}
+          {errors.firstName && <p className="error-message">{errors.firstName}</p>}
         </div>
 
         <div className="form-group">
@@ -96,10 +95,10 @@ function SignupFormPage() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
-              className={errors.lastName ? 'error' : ''}
+              className={errors.lastName ? 'input-error' : ''}
             />
           </label>
-          {errors.lastName && <div className="error-message">{errors.lastName}</div>}
+          {errors.lastName && <p className="error-message">{errors.lastName}</p>}
         </div>
 
         <div className="form-group">
@@ -110,10 +109,10 @@ function SignupFormPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className={errors.password ? 'error' : ''}
+              className={errors.password ? 'input-error' : ''}
             />
           </label>
-          {errors.password && <div className="error-message">{errors.password}</div>}
+          {errors.password && <p className="error-message">{errors.password}</p>}
         </div>
 
         <div className="form-group">
@@ -124,18 +123,24 @@ function SignupFormPage() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className={errors.confirmPassword ? 'error' : ''}
+              className={errors.confirmPassword ? 'input-error' : ''}
             />
           </label>
           {errors.confirmPassword && (
-            <div className="error-message">{errors.confirmPassword}</div>
+            <p className="error-message">{errors.confirmPassword}</p>
           )}
         </div>
 
-        <button type="submit" className="submit-button">Sign Up</button>
+        <button 
+          type="submit" 
+          className="signup-submit-button"
+          disabled={!email || !username || !firstName || !lastName || !password || !confirmPassword}
+        >
+          Sign Up
+        </button>
       </form>
     </div>
   );
 }
 
-export default SignupFormPage;
+export default SignupFormModal;
