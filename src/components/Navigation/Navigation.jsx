@@ -1,4 +1,3 @@
-//frontend/src/components/Navigation/Navigation.jsx
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -42,7 +41,13 @@ function Navigation({ isLoaded }) {
     <nav className="navigation-bar">
       <ul className="nav-links">
         <li className="nav-home">
-          <NavLink to="/" exact className="nav-link">
+          <NavLink 
+            to="/" 
+            end 
+            className={({ isActive }) => 
+              `nav-link ${isActive ? 'active' : ''}`
+            }
+          >
             <i className="fas fa-home" /> Home
           </NavLink>
         </li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'; // Updated import
 import App from './App';
 import './index.css';
 import { Provider } from 'react-redux';
@@ -15,10 +15,15 @@ if (import.meta.env.MODE !== "production") {
 
   window.csrfFetch = csrfFetch;
   window.store = store;
-  window.sessionActions = sessionActions; // <-- ADD THIS LINE
+  window.sessionActions = sessionActions;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+// Get the root element
+const container = document.getElementById('root');
+const root = createRoot(container); // Create a root
+
+// Render your app
+root.render(
   <React.StrictMode>
     <ModalProvider>
       <Provider store={store}>
@@ -29,7 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
-if (process.env.NODE_ENV !== 'production') {
+// Development-only window exports
+if (import.meta.env.MODE !== 'production') {
   window.store = store;
 }
-
