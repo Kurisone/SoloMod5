@@ -42,6 +42,11 @@
     margin-right: 0.5rem;
   }
   
+
+  .hidden {
+    display: none;
+  }
+
   .nav-login-button,
   .nav-signup-button {
     background: none;
