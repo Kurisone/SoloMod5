@@ -1,7 +1,6 @@
-# App Academy React Vite Template
+# FlairBnB
 
-This repo contains a basic Vite React template configured for use in App Academy
-projects.
+This repo contains a the frontend and backend for our Mod 4/5 project!
 
 ## How to clone
 

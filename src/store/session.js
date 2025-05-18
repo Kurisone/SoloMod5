@@ -77,7 +77,7 @@ export const logout = () => async (dispatch) => {
 
   // sessionReducer
   // This reducer manages the session state, including the current user.
-const sessionReducer = (state = initialState, action) => {
+const sessionReducer = (state = noUser, action) => {
   switch (action.type) {
     case SET_USER:
       return { ...state, user: action.payload };
