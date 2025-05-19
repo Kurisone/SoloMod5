@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createNewSpot } from "../../store/spots";
+import { createSpot } from "../../store/spots";
 import "./CreateSpot.css";
 
 function CreateASpot() {
@@ -45,10 +45,15 @@ function CreateASpot() {
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.description || formData.description.length < 30) 
-      newErrors.description = "Description needs at least 30 characters";
+         newErrors.description = "Description needs at least 30 characters";
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.price || isNaN(formData.price)) 
-      newErrors.price = "Valid price is required";
+        newErrors.price = "Valid price is required";
+    // if (formData.lat < -90 || formData.lat > 90) 
+    //     newErrors.lat = "Latitude must be between -90 and 90";
+    // if (formData.lng < -180 || formData.lng > 180) {
+    //     newErrors.lng = "Longitude must be between -180 and 180";
+//   }
     
     // Validate at least one image URL
     if (!images.some(img => img.trim() !== "")) {
@@ -67,7 +72,7 @@ function CreateASpot() {
     setIsSubmitting(true);
     
     try {
-      const newSpot = await dispatch(createNewSpot({
+      const newSpot = await dispatch(createSpot({
         ...formData,
         price: parseFloat(formData.price),
         images: images.filter(img => img.trim() !== "")

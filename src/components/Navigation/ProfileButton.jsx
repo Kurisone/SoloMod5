@@ -1,10 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { FaUserCircle } from 'react-icons/fa';
-import * as sessionActions from '../../store/session';
-import OpenModalMenuItem from './OpenModalMenuItem';
-import LoginFormModal from '../LoginFormModal/LoginFormModal';
-import SignupFormModal from '../SignupFormModal/SignupFormModal';
+import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { FaUserCircle } from "react-icons/fa";
+import * as sessionActions from "../../store/session";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import LoginFormModal from "../LoginFormModal/LoginFormModal";
+import SignupFormModal from "../SignupFormModal/SignupFormModal";
+import { NavLink } from "react-router-dom";
+import "./ProfileButton.css";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -12,7 +14,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    e.stopPropagation();
     setShowMenu(!showMenu);
   };
 
@@ -20,57 +22,85 @@ function ProfileButton({ user }) {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      if (ulRef.current && !ulRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
 
-    document.addEventListener('click', closeMenu);
-
+    document.addEventListener("click", closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-
-  const closeMenu = () => setShowMenu(false);
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
-    closeMenu();
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = `profile-dropdown ${showMenu ? "" : "hidden"}`;
+
+  // Safely get first letter of user's name or return null
+  const getUserInitial = () => {
+    if (!user?.firstName) return null;
+    return user.firstName.charAt(0).toUpperCase();
+  };
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+    <div className="profile-container">
+      <button onClick={toggleMenu} className="profile-btn">
+        <div className="profile-icon-container">
+          <img
+            className="profile-hamburger"
+            alt="menu"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgNTAgNTAiIHdpZHRoPSI1MHB4IiBoZWlnaHQ9IjUwcHgiPjxwYXRoIGQ9Ik0gMCA3LjUgTCAwIDEyLjUgTCA1MCAxMi41IEwgNTAgNy41IFogTSAwIDIyLjUgTCAwIDI3LjUgTCA1MCAyNy41IEwgNTAgMjIuNSBaIE0gMCAzNy41IEwgMCA0Mi41IEwgNTAgNDIuNSBMIDUwIDM3LjUgWiIvPjwvc3ZnPg=="
+          />
+          {user ? (
+            <div className="user-letter">
+              {getUserInitial() || <FaUserCircle className="user-icon" />}
+            </div>
+          ) : (
+            <FaUserCircle className="user-icon" />
+          )}
+        </div>
       </button>
+      
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
+            <li className="dropdown-item user-info">
+              <div>Hello, {user.firstName || 'User'}</div>
+              {user.email && <div className="user-email">{user.email}</div>}
+            </li>
+            <li className="dropdown-item">
+              <NavLink to="/spots/current" className="manage-spots-link">
+                Manage Spots
+              </NavLink>
+            </li>
+            <li className="dropdown-item">
+              <button onClick={logout} className="logout-btn">
+                Log Out
+              </button>
             </li>
           </>
         ) : (
           <>
-            <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
+            <li className="dropdown-item">
+              <OpenModalButton
+                buttonText="Log In"
+                modalComponent={<LoginFormModal />}
+                buttonClass="auth-btn login-btn"
+              />
+            </li>
+            <li className="dropdown-item">
+              <OpenModalButton
+                buttonText="Sign Up"
+                modalComponent={<SignupFormModal />}
+                buttonClass="auth-btn signup-btn"
+              />
+            </li>
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 

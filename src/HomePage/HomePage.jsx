@@ -1,7 +1,6 @@
 //HomePage.jsx
-import SpotsPage from '../Spots/SpotsPage';
+import SpotsPage from '../components/Spots/SpotsPage';
 import './HomePage.css';
-import React from 'react';
 // HomePage component
 // This component serves as the landing page for the application
 // It imports the SpotsPage component to display a list of available spots

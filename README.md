@@ -7,7 +7,7 @@ This repo contains a the frontend and backend for our Mod 4/5 project!
 To clone this repo as `<new-project-name>`, run
 
 ```shell
-npx tiged appacademy/aa-react18-vite-template#main <new-project-name>
+git clone "https://github.com/Kurisone/FinalProjectMod5.git"
 ```
 
 in the directory where you want the new project to appear.

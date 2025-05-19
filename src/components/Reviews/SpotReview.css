@@ -1,0 +1,76 @@
+/* SpotReviews.css */
+.spotReviews {
+  margin-top: 30px;
+  border-top: 1px solid #dddddd;
+  padding-top: 25px;
+}
+
+.spotReviews h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.review-btn {
+  background-color: #FF5A5F;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.review-btn:hover {
+  background-color: #E04B50;
+}
+
+.spotReviews ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+
+.spotReviews li {
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.spotReviews li:last-child {
+  border-bottom: none;
+}
+
+.spotReviews h3 {
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  color: #222222;
+}
+
+.spotReviews p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #484848;
+  margin: 10px 0;
+}
+
+.spotReviews button {
+  background: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #717171;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.spotReviews button:hover {
+  border-color: #b0b0b0;
+  color: #222222;
+}
+
+/* Modal button styling to match Airbnb */
+.review-btn {
+  margin-bottom: 25px;
+}

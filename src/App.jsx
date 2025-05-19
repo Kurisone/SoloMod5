@@ -7,10 +7,14 @@ import Navigation from './components/Navigation/Navigation'
 import { restoreUser }from './store/session';
 import SpotsPage from './components/Spots/SpotsPage'; 
 import SpotDetails from './components/Spots/SpotDetails';
-import HomePage from './components/HomePage/HomePage';
+// import HomePage from './components/HomePage/HomePage';
 import CurrentUserSpots from './components/Spots/CurrentUserSpots';
 import EditSpotForm from './components/Spots/EditSpotForm';
 import Auth from './components/AuthReq/Auth';
+import CreateASpot from './components/Spots/CreateSpot';
+import HomePage from './HomePage/HomePage';
+import SpotReviews from './components/Reviews/SpotReviews';
+
 
 
 // App component
@@ -37,35 +41,55 @@ function Layout() {
     </>
   );
 }
-
+// The router configuration
+// It defines the routes for the application
+// It uses the createBrowserRouter function from react-router-dom to create a router
+// It defines the main layout of the application
+// It defines the child routes for the application
+// It includes the main page, spot details page, create spot page, current user spots page, and edit spot page
+// It uses the Auth component to protect certain routes that require authentication
 const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
         path: '/',
-        element: <SpotsPage /> //spot grid
+        element: (
+        <HomePage>
+          <SpotsPage /> 
+        </HomePage>
+        )
       },
       {
         path: '/spots/:spotId',
-        element: <SpotDetails /> //Spot Page
+        element: (
+          <SpotDetails /> 
+        )
       },
       {
-        path: '/spots/new', // Create new spot
+        path: '/spots/new', 
         element: (
           <Auth> 
-            <manage />
+            <CreateASpot />
           </Auth>
         ),
       },
       {
         path: '/spots/current', 
-        element: <CurrentUserSpots />
+        element: (
+          <Auth>
+            <CurrentUserSpots />
+          </Auth>
+        )
 
       },
       {
         path: '/spots/:spotId/edit',
-        element: <EditSpotForm />
+        element: (
+          <Auth>
+            <EditSpotForm />
+          </Auth>
+        )
       }
     ]
   }
