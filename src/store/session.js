@@ -20,9 +20,6 @@ const removeUser = () => {
   };
 };
 
-// Default No User Session
-const noUser = { user: null };
-
 // Restore Session
 // This function checks if a user is logged in by sending a GET request to the session endpoint.
 export const restoreUser = () => async (dispatch) => {
@@ -77,7 +74,9 @@ export const logout = () => async (dispatch) => {
 
   // sessionReducer
   // This reducer manages the session state, including the current user.
-const sessionReducer = (state = noUser, action) => {
+const initialState = { user: null };
+
+const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
       return { ...state, user: action.payload };
@@ -88,5 +87,4 @@ const sessionReducer = (state = noUser, action) => {
   }
 };
 
-// Exporting the session reducer and action creators
-export default { sessionReducer, setUser, removeUser, restoreUser, signup, login, logout };
+export default sessionReducer;

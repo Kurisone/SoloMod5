@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation'
-import * as sessionActions from './store/session';
+import { restoreUser }from './store/session';
 import SpotsPage from './components/Spots/SpotsPage'; 
 import SpotDetails from './components/Spots/SpotDetails';
 import HomePage from './components/HomePage/HomePage';
@@ -24,7 +24,7 @@ function Layout() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => {
+    dispatch(restoreUser()).then(() => {
       setIsLoaded(true)
     });
   }, [dispatch]);
