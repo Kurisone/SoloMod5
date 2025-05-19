@@ -81,3 +81,8 @@
     color: #4a90e2;
     font-weight: 600;
   }
+  .nav-items-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }

@@ -1,7 +1,7 @@
 //Spots/SpotsPage.jsx
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpots } from '../../store/spots';
+import { getSpots } from '../../store/spots';
 import SpotCard from './SpotCard'; 
 import './SpotsPage.css'
 
@@ -19,7 +19,7 @@ const dispatch = useDispatch();
     return state.spots?.allSpots ? Object.values(state.spots.allSpots) : [];
   });
 useEffect(() => {
-    dispatch(fetchSpots());
+    dispatch(getSpots());
 }, [dispatch]);
 
     return (

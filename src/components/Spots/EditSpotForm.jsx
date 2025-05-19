@@ -1,69 +1,85 @@
-//EditSpotForm.jsx
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { updateSpotThunk } from '../../store/spots';
+import { getSpotById, updateSpot } from '../../store/spots';
 
-
-// EditSpotForm component
-// This component allows users to edit the details of a spot
-// It uses the useParams hook to get the spotId from the URL
-// It uses the useEffect hook to fetch the spot details when the component mounts
-// It uses the useState hook to manage the state of the form data
-// It uses the useDispatch hook to dispatch the updateSpotThunk action
-// It uses the useSelector hook to get the spot details from the Redux store
-// It handles form submission and updates the spot details in the Redux store
-// It uses the useNavigate hook to redirect the user to the updated spot page after successful submission
-// It uses the useEffect hook to set the initial form data when the spot details are fetched
 function EditSpotForm() {
-  const { spotId } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const spot = useSelector((state) => state.spots.singleSpot);
 
-  const spot = useSelector(state => state.spots.allSpots[spotId]);
-
+  // State for form fields
   const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    city: '',
-    state: '',
-    country: '',
-    description: '',
-    price: '',
-    lat: '',
-    lng: ''
+    country: "",
+    address: "",
+    city: "",
+    state: "",
+    description: "",
+    name: "",
+    price: "",
   });
+  
+  // State for images (separate from other form data)
+  const [images, setImages] = useState(["", "", "", "", ""]);
 
+  // Fetch spot data when component mounts
+  useEffect(() => {
+    dispatch(getSpotById(id));
+  }, [dispatch, id]);
+
+  // Initialize form data when spot is loaded
   useEffect(() => {
     if (spot) {
       setFormData({
-        name: spot.name || '',
-        address: spot.address || '',
-        city: spot.city || '',
-        state: spot.state || '',
-        country: spot.country || '',
-        description: spot.description || '',
-        price: spot.price || '',
-        lat: spot.lat || '',
-        lng: spot.lng || ''
+        country: spot.country || "",
+        address: spot.address || "",
+        city: spot.city || "",
+        state: spot.state || "",
+        description: spot.description || "",
+        name: spot.name || "",
+        price: spot.price || "",
       });
+
+      // Handle images
+      if (spot.images && spot.images.length > 0) {
+        const urls = spot.images.map(img => img.url);
+        const filledImages = [...urls, "", "", "", "", ""].slice(0, 5); 
+        setImages(filledImages);
+      }
     }
   }, [spot]);
 
+  // Handle changes for regular form fields
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle changes for image inputs
+  const handleImageChange = (index, value) => {
+    const newImages = [...images];
+    newImages[index] = value;
+    setImages(newImages);
+  };
+
+  // Form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    const updatedSpot = {
+      ...formData,
+      id,
+      price: parseFloat(formData.price),
+      images
+    };
+
     try {
-      const updatedSpot = await dispatch(updateSpotThunk(spotId, formData));
-  
-      if (updatedSpot && updatedSpot.id) {
-        navigate(`/spots/${updatedSpot.id}`); // safely redirect to updated spot page
+      const result = await dispatch(updateSpot(id, updatedSpot));
+      
+      if (result && result.id) {
+        navigate(`/spots/${result.id}`);
       } else {
-        console.error("Failed to update spot.");
+        console.error("Failed to update spot");
       }
     } catch (err) {
       console.error("Error updating spot:", err);
@@ -75,18 +91,115 @@ function EditSpotForm() {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Edit Spot</h2>
-      {Object.keys(formData).map((key) => (
-        <div key={key}>
-          <label>{key}</label>
+      
+      {/* Country */}
+      <div className="input-label-div">
+        <label htmlFor="country">Country</label>
+        <input
+          id="country"
+          name="country"
+          type="text"
+          value={formData.country}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Address */}
+      <div className="input-label-div">
+        <label htmlFor="address">Street Address:</label>
+        <input
+          id="address"
+          name="address"
+          type="text"
+          value={formData.address}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* City */}
+      <div className="input-label-div">
+        <label htmlFor="city">City</label>
+        <input
+          id="city"
+          name="city"
+          type="text"
+          value={formData.city}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* State */}
+      <div className="input-label-div">
+        <label htmlFor="state">State</label>
+        <input
+          id="state"
+          name="state"
+          type="text"
+          value={formData.state}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Description */}
+      <div className="input-label-div">
+        <label htmlFor="description">Describe your place to your guests</label>
+        <p>
+          Mention the best features of your space and any special ammenities
+          like fast wifi or parking.{" "}
+        </p>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Name */}
+      <div className="input-label-div">
+        <label htmlFor="name">Name of Your Spot</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Price */}
+      <div className="input-label-div">
+        <label htmlFor="price">Price per Night (USD):</label>
+        <input
+          id="price"
+          name="price"
+          type="number"
+          value={formData.price}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Image URLs */}
+      {[0, 1, 2, 3, 4].map((index) => (
+        <div className="input-label-div" key={index}>
+          <label htmlFor={`image-${index}`}>Image URL {index + 1}:</label>
           <input
-            type={key === 'price' ? 'number' : 'text'}
-            name={key}
-            value={formData[key]}
-            onChange={handleChange}
-            required
+            id={`image-${index}`}
+            type="url"
+            value={images[index]}
+            onChange={(e) => handleImageChange(index, e.target.value)}
+            placeholder="Image URL"
           />
         </div>
       ))}
+
       <button type="submit">Save Changes</button>
     </form>
   );

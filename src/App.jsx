@@ -10,6 +10,7 @@ import SpotDetails from './components/Spots/SpotDetails';
 import HomePage from './components/HomePage/HomePage';
 import CurrentUserSpots from './components/Spots/CurrentUserSpots';
 import EditSpotForm from './components/Spots/EditSpotForm';
+import Auth from './components/AuthReq/Auth';
 
 
 // App component
@@ -43,19 +44,24 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <HomePage />
-      },
-      {
-        path: '/spots', 
-        element: <SpotsPage />
+        element: <SpotsPage /> //spot grid
       },
       {
         path: '/spots/:spotId',
-        element: <SpotDetails />
+        element: <SpotDetails /> //Spot Page
+      },
+      {
+        path: '/spots/new', // Create new spot
+        element: (
+          <Auth> 
+            <manage />
+          </Auth>
+        ),
       },
       {
         path: '/spots/current', 
         element: <CurrentUserSpots />
+
       },
       {
         path: '/spots/:spotId/edit',
