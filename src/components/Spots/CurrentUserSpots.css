@@ -1,0 +1,133 @@
+/* Main Container */
+.user-spots-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.user-spots-header {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Spots Grid Layout */
+.spots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Spot Card */
+.spot-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.spot-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Spot Image */
+.spot-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.spot-image:hover {
+  opacity: 0.9;
+}
+
+/* Spot Details */
+.spot-details {
+  padding: 1.2rem;
+}
+
+.spot-info {
+  margin-bottom: 1rem;
+}
+
+.spot-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.spot-location {
+  color: #555;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.spot-price {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.4rem;
+}
+
+.spot-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #555;
+}
+
+/* Action Buttons */
+.spot-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.edit-button,
+.delete-button {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.edit-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e6e6e6;
+}
+
+.delete-button {
+  background-color: #ff5a5f;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #e04e50;
+}
+
+/* Empty States */
+.user-spots-message-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.user-spots-message,
+.no-spots-message {
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+}

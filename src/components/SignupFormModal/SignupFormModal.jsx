@@ -46,93 +46,87 @@ function SignupFormModal() {
       <h1 className="signup-modal-title">Sign Up</h1>
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>
-            Email
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className={errors.email ? 'input-error' : ''}
-            />
-          </label>
-          {errors.email && <p className="error-message">{errors.email}</p>}
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className={errors.email ? 'input-error' : ''}
+          />
+          {errors.email && <div className="error-message">{errors.email}</div>}
         </div>
 
         <div className="form-group">
-          <label>
-            Username
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              className={errors.username ? 'input-error' : ''}
-            />
-          </label>
-          {errors.username && <p className="error-message">{errors.username}</p>}
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className={errors.username ? 'input-error' : ''}
+          />
+          {errors.username && <div className="error-message">{errors.username}</div>}
         </div>
 
         <div className="form-group">
-          <label>
-            First Name
-            <input
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-              className={errors.firstName ? 'input-error' : ''}
-            />
-          </label>
-          {errors.firstName && <p className="error-message">{errors.firstName}</p>}
+          <label htmlFor="firstName">First Name</label>
+          <input
+            id="firstName"
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            className={errors.firstName ? 'input-error' : ''}
+          />
+          {errors.firstName && <div className="error-message">{errors.firstName}</div>}
         </div>
 
         <div className="form-group">
-          <label>
-            Last Name
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-              className={errors.lastName ? 'input-error' : ''}
-            />
-          </label>
-          {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            id="lastName"
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            className={errors.lastName ? 'input-error' : ''}
+          />
+          {errors.lastName && <div className="error-message">{errors.lastName}</div>}
         </div>
 
         <div className="form-group">
-          <label>
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className={errors.password ? 'input-error' : ''}
-            />
-          </label>
-          {errors.password && <p className="error-message">{errors.password}</p>}
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className={errors.password ? 'input-error' : ''}
+          />
+          {errors.password && <div className="error-message">{errors.password}</div>}
         </div>
 
         <div className="form-group">
-          <label>
-            Confirm Password
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              className={errors.confirmPassword ? 'input-error' : ''}
-            />
-          </label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            className={errors.confirmPassword ? 'input-error' : ''}
+          />
           {errors.confirmPassword && (
-            <p className="error-message">{errors.confirmPassword}</p>
+            <div className="error-message">{errors.confirmPassword}</div>
           )}
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="signup-submit-button"
           disabled={!email || !username || !firstName || !lastName || !password || !confirmPassword}
         >

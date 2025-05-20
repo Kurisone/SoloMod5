@@ -31,14 +31,16 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const closeMenu = () => setShowMenu(false);
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    closeMenu();
   };
 
   const ulClassName = `profile-dropdown ${showMenu ? "" : "hidden"}`;
 
-  // Safely get first letter of user's name or return null
   const getUserInitial = () => {
     if (!user?.firstName) return null;
     return user.firstName.charAt(0).toUpperCase();
@@ -62,7 +64,7 @@ function ProfileButton({ user }) {
           )}
         </div>
       </button>
-      
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
@@ -71,7 +73,11 @@ function ProfileButton({ user }) {
               {user.email && <div className="user-email">{user.email}</div>}
             </li>
             <li className="dropdown-item">
-              <NavLink to="/spots/current" className="manage-spots-link">
+              <NavLink
+                to="/spots/current"
+                className="manage-spots-link"
+                onClick={closeMenu}
+              >
                 Manage Spots
               </NavLink>
             </li>
@@ -87,14 +93,16 @@ function ProfileButton({ user }) {
               <OpenModalButton
                 buttonText="Log In"
                 modalComponent={<LoginFormModal />}
-                buttonClass="auth-btn login-btn"
+                onButtonClick={closeMenu}
+                buttonClass="dropdown-auth-btn"
               />
             </li>
             <li className="dropdown-item">
               <OpenModalButton
                 buttonText="Sign Up"
                 modalComponent={<SignupFormModal />}
-                buttonClass="auth-btn signup-btn"
+                onButtonClick={closeMenu}
+                buttonClass="dropdown-auth-btn"
               />
             </li>
           </>

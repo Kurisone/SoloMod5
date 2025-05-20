@@ -158,7 +158,7 @@ function CreateASpot() {
         <div className="input-group">
           <label htmlFor="description">
             Fill us in on your spot!
-            <span className="hint">What makes your place stand out?</span>
+            <span className="hint"> What makes your place stand out?</span>
           </label>
           <textarea
             id="description"

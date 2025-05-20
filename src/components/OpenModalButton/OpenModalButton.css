@@ -1,0 +1,21 @@
+.modal-button-default {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.nav-login-button {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+}
+
+.nav-signup-button {
+    background-color: #ff385c;
+    color: white;
+    border: 1px solid #ff385c;
+    margin-left: 10px;
+}

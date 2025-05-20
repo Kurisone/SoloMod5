@@ -53,12 +53,25 @@ export const deleteSpot = (spotId) => async (dispatch) => {
 };
 
 export const updateSpot = (spotId, spotData) => async (dispatch) => {
-  const res = await csrfFetch(`/api/spots/${spotId}`, {
-    method: "PUT",
-    body: JSON.stringify(spotData)
-  });
-  const spot = await res.json();
-  dispatch(spotUpdate(spot));
+  try {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(spotData)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Update failed');
+    }
+
+    const updatedSpot = await response.json();
+    dispatch(spotUpdate(updatedSpot));
+    return updatedSpot; 
+  } catch (error) {
+    console.error('Update spot error:', error);
+    throw error;
+  }
 };
 
 // Reducer
@@ -78,13 +91,17 @@ export default function spotsReducer(state = initialState, action) {
       return { ...state, allSpots: [...state.allSpots, action.spot] };
     case SET_USER_SPOTS:
       return { ...state, userSpots: action.spots };
-    case UPDATE_SPOT:
-      return {
-        ...state,
-        userSpots: state.userSpots.map(spot => 
-          spot.id === action.spot.id ? action.spot : spot
-        )
-      };
+case UPDATE_SPOT:
+  return {
+    ...state,
+    allSpots: state.allSpots.map(spot => 
+      spot.id === action.spot.id ? action.spot : spot
+    ),
+    currentSpot: action.spot,
+    userSpots: state.userSpots.map(spot =>
+      spot.id === action.spot.id ? action.spot : spot
+    )
+  };
     case REMOVE_SPOT:
       return {
         ...state,

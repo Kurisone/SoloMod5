@@ -1,0 +1,71 @@
+/* Main container styles */
+.spot-details-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.spot-details-container h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.spot-details-container p:first-of-type {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.spot-details-container img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* Loading state styles */
+.spot-details-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  text-align: center;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #ff5a5f;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .spot-details-container {
+    padding: 15px;
+  }
+  
+  .spot-details-container h1 {
+    font-size: 1.5rem;
+  }
+  
+  .spot-details-container img {
+    max-width: 100%;
+  }
+}

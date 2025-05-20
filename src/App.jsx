@@ -13,7 +13,7 @@ import EditSpotForm from './components/Spots/EditSpotForm';
 import Auth from './components/AuthReq/Auth';
 import CreateASpot from './components/Spots/CreateSpot';
 import HomePage from './HomePage/HomePage';
-import SpotReviews from './components/Reviews/SpotReviews';
+
 
 
 

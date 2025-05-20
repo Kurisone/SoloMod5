@@ -17,7 +17,7 @@ function SpotCard({ spot }) {
           <div className="spot-info">
             <div>{spot.city}, {spot.state}</div>
             <div>${spot.price} / night</div>
-            <div>★ {spot.avgRating === '0.0' ? 'New' : spot.avgRating}</div>
+            <div> {spot.avgRating === '0.0' ? 'New' : spot.avgRating}</div>
           </div>
         </div>
       </Link>
