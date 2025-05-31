@@ -54,18 +54,3 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .spot-details-container {
-    padding: 15px;
-  }
-  
-  .spot-details-container h1 {
-    font-size: 1.5rem;
-  }
-  
-  .spot-details-container img {
-    max-width: 100%;
-  }
-}

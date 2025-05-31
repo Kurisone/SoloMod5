@@ -54,7 +54,6 @@ function SpotDetails() {
       <p>{spot.description}</p>
       <p><strong>${spot.price}</strong> / night</p>
       <p>★ {spot.avgStarRating || "New"}</p>
-
       <hr style={{ margin: '20px 0' }} />
       <h2>Reviews</h2>
       <SpotReviews spotId={spotId} />
