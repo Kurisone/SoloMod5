@@ -8,7 +8,7 @@ import './HomePage.css';
 export default function HomePage() {
   return (
     <div className="home-page">
-        <h1>Welcome to Our App</h1>
+        <h1>Welcome to FlairBnB</h1>
         <p>Discover amazing spots around the world.</p>
         <SpotsPage />
     </div>

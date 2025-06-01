@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 16px;
 }
 
 .form-group label {
@@ -79,21 +80,4 @@
 .signup-submit-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-label {
-  font-weight: 500;
-}
-
-.error-message {
-  color: #e74c3c;
-  font-size: 0.8rem;
-  margin-top: -4px;
 }

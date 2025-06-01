@@ -1,3 +1,5 @@
+// frontend/src/components/SignupFormModal/SignupFormModal.jsx
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
@@ -40,6 +42,14 @@ function SignupFormModal() {
       confirmPassword: "Confirm Password field must be the same as the Password field"
     });
   };
+
+  const isDisabled = 
+    !email || 
+    username.length < 4 || 
+    !firstName || 
+    !lastName || 
+    password.length < 6 || 
+    !confirmPassword;
 
   return (
     <div className="signup-modal-container">
@@ -128,7 +138,7 @@ function SignupFormModal() {
         <button
           type="submit"
           className="signup-submit-button"
-          disabled={!email || !username || !firstName || !lastName || !password || !confirmPassword}
+          disabled={isDisabled}
         >
           Sign Up
         </button>

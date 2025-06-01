@@ -11,10 +11,11 @@ import './SpotCard.css';
 // It uses a fallback image if the spot does not have a preview image
 function SpotCard({ spot }) {
     return (
-      <Link to={`/spots/${spot.id}`} className="spot-card-link">
+      <Link to={`/spots/${spot.id}`} className="spot-card-link" title={spot.name}>
         <div className="spot-card">
           <img src={spot.previewImage || '/fallback.jpg'} alt={spot.name} />
           <div className="spot-info">
+            <h3 className="spot-name">{spot.name}</h3>
             <div>{spot.city}, {spot.state}</div>
             <div>${spot.price} / night</div>
             <div> {spot.avgRating === '0.0' ? 'New' : spot.avgRating}</div>
@@ -22,6 +23,6 @@ function SpotCard({ spot }) {
         </div>
       </Link>
     );
-  }
+}
 
 export default SpotCard;

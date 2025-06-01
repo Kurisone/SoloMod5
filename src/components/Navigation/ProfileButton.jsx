@@ -11,7 +11,23 @@ import "./ProfileButton.css";
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const [userInitial, setUserInitial] = useState(() => {
+    // Initialize from localStorage if available
+    return localStorage.getItem('userInitial') || null;
+  });
   const ulRef = useRef();
+
+  // Update initial when user changes
+  useEffect(() => {
+    if (user?.firstName) {
+      const initial = user.firstName.charAt(0).toUpperCase();
+      setUserInitial(initial);
+      localStorage.setItem('userInitial', initial);
+    } else {
+      setUserInitial(null);
+      localStorage.removeItem('userInitial');
+    }
+  }, [user]);
 
   const toggleMenu = (e) => {
     e.stopPropagation();
@@ -41,11 +57,6 @@ function ProfileButton({ user }) {
 
   const ulClassName = `profile-dropdown ${showMenu ? "" : "hidden"}`;
 
-  const getUserInitial = () => {
-    if (!user?.firstName) return null;
-    return user.firstName.charAt(0).toUpperCase();
-  };
-
   return (
     <div className="profile-container">
       <button onClick={toggleMenu} className="profile-btn">
@@ -57,7 +68,7 @@ function ProfileButton({ user }) {
           />
           {user ? (
             <div className="user-letter">
-              {getUserInitial() || <FaUserCircle className="user-icon" />}
+              {userInitial || <FaUserCircle className="user-icon" />}
             </div>
           ) : (
             <FaUserCircle className="user-icon" />

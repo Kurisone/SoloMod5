@@ -39,23 +39,16 @@ function CreateASpot() {
   const validateForm = () => {
     const newErrors = {};
     
-    // Validate required fields
     if (!formData.country) newErrors.country = "Country is required";
     if (!formData.address) newErrors.address = "Address is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.description || formData.description.length < 30) 
-         newErrors.description = "Description needs at least 30 characters";
+      newErrors.description = "Description needs at least 30 characters";
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.price || isNaN(formData.price)) 
-        newErrors.price = "Valid price is required";
-    // if (formData.lat < -90 || formData.lat > 90) 
-    //     newErrors.lat = "Latitude must be between -90 and 90";
-    // if (formData.lng < -180 || formData.lng > 180) {
-    //     newErrors.lng = "Longitude must be between -180 and 180";
-//   }
+      newErrors.price = "Valid price is required";
     
-    // Validate at least one image URL
     if (!images.some(img => img.trim() !== "")) {
       newErrors.images = "At least one image URL is required";
     }
@@ -91,10 +84,12 @@ function CreateASpot() {
 
   return (
     <form onSubmit={handleSubmit} className="create-spot-form">
-      <h2>Create a New Spot</h2>
+      <h1>Create a New Spot</h1>
       
+      {/* Section 1: Location */}
       <div className="form-section">
-        <h3>Location Information</h3>
+        <h2>Where's your place located?</h2>
+        <p className="section-caption">Guests will only get your exact address once they booked a reservation.</p>
         
         <div className="input-group">
           <label htmlFor="country">Country</label>
@@ -118,7 +113,7 @@ function CreateASpot() {
             type="text"
             value={formData.address}
             onChange={handleChange}
-            placeholder="Address"
+            placeholder="Street Address"
             required
           />
           {errors.address && <span className="error">{errors.address}</span>}
@@ -153,19 +148,20 @@ function CreateASpot() {
         </div>
       </div>
 
+      {/* Section 2: Description */}
       <div className="form-section">
-        <h3>Describe Your Place!</h3>
+        <h2>Describe your place to guests</h2>
+        <p className="section-caption">
+          Mention the best features of your space, any special amenities like 
+          fast wifi or parking, and what you love about the neighborhood.
+        </p>
         <div className="input-group">
-          <label htmlFor="description">
-            Fill us in on your spot!
-            <span className="hint"> What makes your place stand out?</span>
-          </label>
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
-            placeholder="Description (minimum 30 characters)"
+            placeholder="Please write at least 30 characters"
             required
             minLength={30}
           />
@@ -173,31 +169,41 @@ function CreateASpot() {
         </div>
       </div>
 
+      {/* Section 3: Title */}
       <div className="form-section">
-        <h3>Spot Information</h3>
+        <h2>Create a title for your spot</h2>
+        <p className="section-caption">
+          Catch guests' attention with a spot title that highlights what makes your place special.
+        </p>
         <div className="input-group">
-          <label htmlFor="name">What is the name of your Spot?</label>
           <input
             id="name"
             name="name"
             type="text"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Spot name"
+            placeholder="Name of your spot"
             required
           />
           {errors.name && <span className="error">{errors.name}</span>}
         </div>
+      </div>
 
-        <div className="input-group">
-          <label htmlFor="price">What do you charge a night? (USD)</label>
+      {/* Section 4: Price */}
+      <div className="form-section">
+        <h2>Set a base price for your spot</h2>
+        <p className="section-caption">
+          Competitive pricing can help your listing stand out and rank higher in search results.
+        </p>
+        <div className="input-group price-input">
+          <span className="dollar-sign">$</span>
           <input
             id="price"
             name="price"
             type="number"
             value={formData.price}
             onChange={handleChange}
-            placeholder="Price"
+            placeholder="Price per night (USD)"
             min="1"
             required
           />
@@ -205,20 +211,20 @@ function CreateASpot() {
         </div>
       </div>
 
+      {/* Section 5: Photos */}
       <div className="form-section">
-        <h3>Images</h3>
-        <p>Add up to 5 images to showcase the beauty of your Spot!</p>
+        <h2>Liven up your spot with photos</h2>
+        <p className="section-caption">Submit a link to at least one photo to publish your spot.</p>
         {errors.images && <span className="error">{errors.images}</span>}
         
         {[0, 1, 2, 3, 4].map((index) => (
           <div className="input-group" key={index}>
-            <label htmlFor={`image-${index}`}>Image URL {index + 1}</label>
             <input
               id={`image-${index}`}
               type="url"
               value={images[index]}
               onChange={(e) => handleImageChange(index, e.target.value)}
-              placeholder="Image URL"
+              placeholder={index === 0 ? "Preview Image URL" : "Image URL"}
             />
           </div>
         ))}

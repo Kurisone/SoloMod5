@@ -26,6 +26,22 @@ function LoginFormModal() {
       });
   };
 
+  const handleDemoLogin = () => {
+    return dispatch(sessionActions.login({ 
+      credential: 'demo@user.io', 
+      password: 'password' 
+    }))
+    .then(closeModal)
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    });
+  };
+
+  const isDisabled = credential.length < 4 || password.length < 6;
+
   return (
     <div className="login-form-container">
       <h1>Log In</h1>
@@ -55,14 +71,25 @@ function LoginFormModal() {
             required
             className={errors.password ? 'input-error' : ''}
           />
+          {errors.password && (
+            <div className="error-message">{errors.password}</div>
+          )}
         </div>
 
         <button
           type="submit"
           className="submit-button"
-          disabled={!credential || !password}
+          disabled={isDisabled}
         >
           Log In
+        </button>
+
+        <button
+          type="button"
+          className="demo-user-button"
+          onClick={handleDemoLogin}
+        >
+          Log in as Demo User
         </button>
       </form>
     </div>

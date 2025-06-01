@@ -1,4 +1,3 @@
-/* ReviewPage.css */
 .review-page {
   padding: 25px;
   max-width: 500px;
@@ -31,37 +30,28 @@
   border-color: #717171;
 }
 
-.star-rating {
+.star-rating-input {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 25px;
 }
 
-.star-rating label {
+.star {
   cursor: pointer;
   font-size: 24px;
-  color: #717171;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  transition: color 0.2s ease;
 }
 
-.star-rating input[type="radio"] {
-  display: none;
-}
-
-.star-rating input[type="radio"]:checked + span {
+.star.filled {
   color: #FF385C;
 }
 
-.star-rating span {
-  display: inline-block;
-  padding: 5px;
+.star.empty {
+  color: #DDDDDD;
 }
 
-.review-page button {
+.submit-review-btn {
   width: 100%;
   background-color: #FF385C;
   color: white;
@@ -74,8 +64,13 @@
   transition: background-color 0.2s ease;
 }
 
-.review-page button:hover {
+.submit-review-btn:hover {
   background-color: #E61E4D;
+}
+
+.submit-review-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 .error {
@@ -83,19 +78,4 @@
   font-size: 14px;
   margin: 5px 0 15px;
   text-align: center;
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .review-page {
-    padding: 15px;
-  }
-  
-  .star-rating {
-    gap: 10px;
-  }
-  
-  .star-rating label {
-    font-size: 20px;
-  }
 }

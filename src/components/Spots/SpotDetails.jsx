@@ -1,29 +1,27 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useModal } from '../../context/Modal';
 import SpotReviews from '../Reviews/SpotReviews';
+import ReviewPage from '../Reviews/ReviewPage';
 import './SpotDetails.css';
 
 function SpotDetails() {
   const { spotId } = useParams();
   const [spot, setSpot] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { setModalContent } = useModal();
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchSpot = async () => {
       try {
-        // Add 1-3 second delay before fetching
         const delay = 1000 + Math.random() * 2000;
         await new Promise(resolve => setTimeout(resolve, delay));
         
         const res = await fetch(`/api/spots/${spotId}`);
-        console.log('Response:', res);
-        
         if (res.ok) {
           const data = await res.json();
-          console.log('Spot data:', data);
           setSpot(data);
-        } else {
-          console.error('Failed to fetch spot:', res.status);
         }
       } catch (err) {
         console.error('Error fetching spot:', err);
@@ -32,8 +30,34 @@ function SpotDetails() {
       }
     };
 
+    const fetchUser = async () => {
+      const res = await fetch('/api/session');
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.user);
+      }
+    };
+
+const fetchReviews = async () => {
+  const res = await fetch(`/api/spots/${spotId}/reviews`);
+  if (res.ok) {
+    const data = await res.json();
+    // Sort reviews by createdAt date (newest first)
+    const sortedReviews = (data.Reviews || []).sort((a, b) => 
+      new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    setReviews(sortedReviews);
+  }
+};
+
     fetchSpot();
+    fetchUser();
+    fetchReviews();
   }, [spotId]);
+
+  const handleReserveClick = () => {
+    alert("Feature coming soon");
+  };
 
   if (isLoading) {
     return (
@@ -46,17 +70,34 @@ function SpotDetails() {
     );
   }
 
+
   return (
     <div className="spot-details-container">
-      <h1>{spot.name}</h1>
-      <p>{spot.city}, {spot.state}, {spot.country}</p>
-      <img src={spot.SpotImages?.[0]?.url} alt={spot.name} width="400" />
-      <p>{spot.description}</p>
-      <p><strong>${spot.price}</strong> / night</p>
-      <p>★ {spot.avgStarRating || "New"}</p>
-      <hr style={{ margin: '20px 0' }} />
-      <h2>Reviews</h2>
-      <SpotReviews spotId={spotId} />
+      <div className="spot-details-main">
+        <div className="spot-details-content">
+          <h1>{spot?.name}</h1>
+          <p>{spot?.city}, {spot?.state}, {spot?.country}</p>
+          <img src={spot?.SpotImages?.[0]?.url} alt={spot?.name} width="400" />
+          <p>{spot?.description}</p>
+          <p>★ {spot?.avgStarRating || "New"}</p>
+          <hr style={{ margin: '20px 0' }} />
+          <h2>Reviews</h2>
+          <SpotReviews spotId={spotId} />
+        </div>
+        
+        <div className="spot-callout-box">
+          <div className="price-container">
+            <span className="price">${spot?.price}</span>
+            <span className="per-night"> / night</span>
+          </div>
+          <button 
+            className="reserve-button"
+            onClick={handleReserveClick}
+          >
+            Reserve
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

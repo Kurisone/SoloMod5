@@ -1,3 +1,4 @@
+/* CreateSpot.css */
 .create-spot-form {
   max-width: 800px;
   margin: 2rem auto;
@@ -8,31 +9,81 @@
   font-family: Arial, sans-serif;
 }
 
-.input-label-div {
+.create-spot-form h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.form-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.section-caption {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.input-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
 
-.input-label-div label {
+.input-group label {
   margin-bottom: 0.5rem;
   font-weight: 500;
+  color: #333;
 }
 
-.input-label-div input,
-.input-label-div textarea {
+.input-group input,
+.input-group textarea {
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  transition: border-color 0.2s;
 }
 
-.input-label-div textarea {
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.input-group textarea {
   min-height: 100px;
   resize: vertical;
 }
 
-.error-message {
+.price-input {
+  position: relative;
+  align-items: flex-start;
+}
+
+.price-input .dollar-sign {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.price-input input {
+  padding-left: 30px;
+}
+
+.error {
   color: #ff385c;
   font-size: 0.9rem;
   margin-top: 0.3rem;
@@ -48,8 +99,22 @@
   cursor: pointer;
   margin-top: 1rem;
   transition: background-color 0.2s;
+  width: 100%;
+  font-weight: 500;
 }
 
 .submit-button:hover {
   background-color: #e61e4d;
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #ff385c;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
 }

@@ -1,5 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton/OpenModalButton';
 import LoginFormModal from '../LoginFormModal/LoginFormModal';
@@ -9,6 +10,19 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state?.session?.user ?? null);
+  const navigate = useNavigate();
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
+  const handleHomeRedirect = (e) => {
+    e.preventDefault();
+    setIsRedirecting(true);
+    // Add 1-3 second delay similar to SpotDetails
+    const delay = 1000 + Math.random() * 2000;
+    setTimeout(() => {
+      navigate("/");
+      setIsRedirecting(false);
+    }, delay);
+  };
 
   let sessionLinks;
   if (sessionUser) {
@@ -45,12 +59,28 @@ function Navigation({ isLoaded }) {
     );
   }
 
+  if (isRedirecting) {
+    return (
+      <div className="loading-container">
+        <div className="loading-content">
+          <div className="loading-spinner"></div>
+          <h2>Redirecting to the Homepage...</h2>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <nav className="navigation-bar">
       <div className="nav-left">
         <ul className="nav-links">
           <li className="nav-home">
-            <NavLink to="/" end className="nav-link">
+            <NavLink 
+              to="/" 
+              end 
+              className="nav-link"
+              onClick={handleHomeRedirect}
+            >
               <img src={logo} alt="Home" className="nav-logo" />
             </NavLink>
           </li>
