@@ -1,0 +1,93 @@
+/* Modal.css */
+#modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+#modal-content {
+  position: relative;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 568px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+  padding: 24px;
+}
+
+/* Close button (if you add one) */
+.modal-close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #717171;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modal-close-button:hover {
+  background-color: #f7f7f7;
+  color: #222222;
+}
+
+/* Modal header styles */
+.modal-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ebebeb;
+  margin-bottom: 24px;
+}
+
+.modal-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222222;
+  margin: 0;
+}
+
+/* Modal body content */
+.modal-body {
+  padding: 8px 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+

@@ -1,0 +1,109 @@
+/* Main container styles */
+.spot-details-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.spot-details-main {
+  display: flex;
+  gap: 40px;
+}
+
+.spot-details-content {
+  flex: 1;
+}
+
+.spot-callout-box {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.per-night {
+  font-size: 1rem;
+  color: #555;
+}
+
+.reserve-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reserve-button:hover {
+  background-color: #ff3b40;
+}
+
+.spot-details-container h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.spot-details-container p:first-of-type {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.spot-details-container img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* Loading state styles */
+.spot-details-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  text-align: center;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #ff5a5f;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

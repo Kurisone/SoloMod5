@@ -1,0 +1,194 @@
+/* SpotReviews.css */
+.spotReviews {
+  margin-top: 30px;
+  border-top: 1px solid #dddddd;
+  padding-top: 25px;
+}
+
+.spotReviews h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.post-review-btn {
+  background-color: #FF385C;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 15px 0;
+}
+
+.post-review-btn:hover {
+  background-color: #E61E4D;
+}
+
+.spotReviews ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+
+.spotReviews li {
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.spotReviews li:last-child {
+  border-bottom: none;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.spotReviews h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #222222;
+  font-weight: 600;
+}
+
+/* Enhanced Star Rating Display */
+.star-rating-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star-rating-display .star {
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
+
+.star-rating-display .star.filled {
+  color: #FF5A5F;
+}
+
+.star-rating-display .star.empty {
+  color: #e0e0e0;
+}
+
+/* Star Rating Input (for ReviewPage) */
+.star-rating-input {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  gap: 5px;
+}
+
+.star-rating-input .star {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.star-rating-input .star.filled {
+  color: #FF5A5F;
+}
+
+.star-rating-input .star.empty {
+  color: #CCCCCC;
+}
+
+.star-rating-input .star:hover {
+  color: #FF5A5F;
+}
+
+.rating-text {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.review-date {
+  font-size: 14px;
+  color: #717171;
+  margin: 4px 0 10px 0;
+}
+
+.spotReviews .review-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #484848;
+  margin: 10px 0 15px 0;
+}
+
+.delete-review-btn {
+  background: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #717171;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-review-btn:hover {
+  border-color: #b0b0b0;
+  color: #222222;
+  background-color: #f9f9f9;
+}
+
+/* No reviews message */
+.no-reviews {
+  color: #717171;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+/* Review Form Styles */
+.review-page {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 400px;
+}
+
+.review-page textarea {
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  resize: vertical;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.submit-review-btn {
+  background-color: #FF5A5F;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.submit-review-btn:hover {
+  background-color: #E04B50;
+}
+
+.submit-review-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #FF5A5F;
+  font-size: 14px;
+  margin-top: 5px;
+}

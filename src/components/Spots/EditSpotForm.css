@@ -1,0 +1,150 @@
+/* Loading State */
+.edit-spot-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #ff5a5f;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Form Container */
+.edit-spot-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.edit-spot-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.5rem 4rem;
+    background: #f8f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(17, 16, 16, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Form Sections */
+.form-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.form-section h3 {
+  margin-bottom: 5px;
+}
+
+.form-section p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Input Groups */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.input-row {
+  display: flex;
+  gap: 15px;
+}
+
+.input-row .input-group {
+  flex: 1;
+}
+
+label {
+  font-weight: 600;
+}
+
+input, textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Price Input */
+.price-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.price-input span {
+  font-size: 1.2rem;
+}
+
+.price-input input {
+  flex: 1;
+}
+
+/* Image Inputs */
+.image-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #ff5a5f;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  align-self: flex-start;
+}
+
+.submit-button:hover {
+  background-color: #e04e50;
+}
+
+/* Error Handling */
+.error {
+  color: #ff5a5f;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: #ff5a5f;
+  padding: 10px;
+  background-color: #ffebec;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
