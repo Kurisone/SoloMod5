@@ -1,16 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useModal } from '../../context/Modal';
 import SpotReviews from '../Reviews/SpotReviews';
-import ReviewPage from '../Reviews/ReviewPage';
 import './SpotDetails.css';
 
 function SpotDetails() {
   const { spotId } = useParams();
   const [spot, setSpot] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { setModalContent } = useModal();
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchSpot = async () => {
@@ -30,29 +26,7 @@ function SpotDetails() {
       }
     };
 
-    const fetchUser = async () => {
-      const res = await fetch('/api/session');
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-      }
-    };
-
-const fetchReviews = async () => {
-  const res = await fetch(`/api/spots/${spotId}/reviews`);
-  if (res.ok) {
-    const data = await res.json();
-    // Sort reviews by createdAt date (newest first)
-    const sortedReviews = (data.Reviews || []).sort((a, b) => 
-      new Date(b.createdAt) - new Date(a.createdAt)
-    );
-    setReviews(sortedReviews);
-  }
-};
-
     fetchSpot();
-    fetchUser();
-    fetchReviews();
   }, [spotId]);
 
   const handleReserveClick = () => {
@@ -69,7 +43,6 @@ const fetchReviews = async () => {
       </div>
     );
   }
-
 
   return (
     <div className="spot-details-container">
